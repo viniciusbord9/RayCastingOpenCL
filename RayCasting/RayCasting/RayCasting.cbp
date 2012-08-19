@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="RayCasting" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/RayCasting" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/RayCasting" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Camera.cpp" />
+		<Unit filename="Image.cpp" />
+		<Unit filename="Ray.cpp" />
+		<Unit filename="RayCasting.cpp" />
+		<Unit filename="RayCasting.depend" />
+		<Unit filename="Scene.cpp" />
+		<Unit filename="SceneObject.cpp" />
+		<Unit filename="Sphere.cpp" />
+		<Unit filename="Util.cpp" />
+		<Unit filename="Vector.cpp" />
+		<Unit filename="include/Camera.h" />
+		<Unit filename="include/Color.h" />
+		<Unit filename="include/Image.h" />
+		<Unit filename="include/OpenCLUtil.h" />
+		<Unit filename="include/Ray.h" />
+		<Unit filename="include/RayCasting.h" />
+		<Unit filename="include/Scene.h" />
+		<Unit filename="include/SceneObject.h" />
+		<Unit filename="include/Sphere.h" />
+		<Unit filename="include/Util.h" />
+		<Unit filename="include/Vector.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/OpenCLUtil.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
