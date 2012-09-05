@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="RayCasting.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="2850" topLine="105" />
+	<File name="Camera.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="include/OpenCLUtil.h" open="1" top="0" tabpos="4">
+	<File name="RayCasting.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="5802" topLine="154" />
+	</File>
+	<File name="Util.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="765" topLine="9" />
+	</File>
+	<File name="include/Camera.h" open="1" top="0" tabpos="6">
+		<Cursor position="161" topLine="0" />
+	</File>
+	<File name="include/OpenCLUtil.h" open="0" top="0" tabpos="4">
 		<Cursor position="43" topLine="0" />
 	</File>
-	<File name="include/RayCasting.h" open="1" top="0" tabpos="5">
-		<Cursor position="164" topLine="0" />
+	<File name="include/RayCasting.h" open="1" top="0" tabpos="4">
+		<Cursor position="94" topLine="0" />
+	</File>
+	<File name="include/Scene.h" open="1" top="0" tabpos="10">
+		<Cursor position="303" topLine="0" />
+	</File>
+	<File name="include/SceneObject.h" open="1" top="0" tabpos="11">
+		<Cursor position="179" topLine="0" />
+	</File>
+	<File name="include/Util.h" open="1" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="include/Vector.h" open="1" top="0" tabpos="7">
+		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="72" topLine="0" />
+		<Cursor position="84" topLine="0" />
 	</File>
 	<File name="src/OpenCLUtil.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="13" topLine="0" />
+		<Cursor position="329" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
