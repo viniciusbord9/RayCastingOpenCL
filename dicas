@@ -1,1 +1,4 @@
 git remote set-url origin https://yourusername@github.com/user/repo.git
+
+repositorio: git remote set-url origin https://viniciusbord9@github.com/viniciusbord9/RayCastingOpenCL.git
+
