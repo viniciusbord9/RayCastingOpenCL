@@ -9,6 +9,11 @@
 #include <CL/cl.h>
 #include <CL/opencl.h>
 #include <CL/cl_platform.h>
+#include <SDKCommon.hpp>
+#include <SDKApplication.hpp>
+#include <SDKCommandArgs.hpp>
+#include <SDKFile.hpp>
+#include "Structs_OpenCL.h"
 #include "Scene.h"
 #include "Vector.h"
 #include "Sphere.h"

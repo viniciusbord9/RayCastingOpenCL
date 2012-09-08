@@ -32,16 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Camera.cpp" />
-		<Unit filename="Image.cpp" />
-		<Unit filename="Ray.cpp" />
-		<Unit filename="RayCasting.cpp" />
-		<Unit filename="RayCasting.depend" />
-		<Unit filename="Scene.cpp" />
-		<Unit filename="SceneObject.cpp" />
-		<Unit filename="Sphere.cpp" />
-		<Unit filename="Util.cpp" />
-		<Unit filename="Vector.cpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Color.h" />
 		<Unit filename="include/Image.h" />
@@ -51,10 +41,23 @@
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/SceneObject.h" />
 		<Unit filename="include/Sphere.h" />
+		<Unit filename="include/Structs_OpenCL" />
+		<Unit filename="include/Structs_OpenCL.h" />
 		<Unit filename="include/Util.h" />
 		<Unit filename="include/Vector.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="src/OpenCLUtil.cpp" />
+		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Image.cpp" />
+		<Unit filename="src/Ray.cpp" />
+		<Unit filename="src/RayCasting.cpp" />
+		<Unit filename="src/RayCasting.depend" />
+		<Unit filename="src/RayCasting.layout" />
+		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/SceneObject.cpp" />
+		<Unit filename="src/Sphere.cpp" />
+		<Unit filename="src/Util.cpp" />
+		<Unit filename="src/Vector.cpp" />
+		<Unit filename="src/kernel.cl" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

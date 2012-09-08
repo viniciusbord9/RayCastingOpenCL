@@ -1,0 +1,340 @@
+# depslib dependency file v1.0
+1344464421 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Camera.cpp
+	"include/Camera.h"
+
+1340503576 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Camera.h
+	"Vector.h"
+	"Util.h"
+
+1338851401 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Vector.h
+
+1338850911 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Util.h
+	"Vector.h"
+	<math.h>
+
+1344381868 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Image.cpp
+	"Image.h"
+
+1340494219 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Image.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<assert.h>
+	<stdarg.h>
+
+1338851468 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Ray.cpp
+	"Ray.h"
+
+1338851457 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Ray.h
+	"Vector.h"
+
+1344392084 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Scene.cpp
+	"Scene.h"
+
+1344392097 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Scene.h
+	<vector>
+	"SceneObject.h"
+	"Camera.h"
+	"Color.h"
+
+1344382826 /home/viniciusbord9/Documentos/RayCasting/RayCasting/SceneObject.h
+	<iostream>
+	"Color.h"
+	"Ray.h"
+
+1344383954 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Color.h
+
+1340494016 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/SceneObject.cpp
+	"SceneObject.h"
+
+1344382549 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Sphere.cpp
+	"Sphere.h"
+
+1340493476 /home/viniciusbord9/Documentos/RayCasting/RayCasting/Sphere.h
+	"SceneObject.h"
+	"Ray.h"
+	"Vector.h"
+	"Util.h"
+
+1340328689 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Util.cpp
+	"Util.h"
+
+1338845643 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/Vector.cpp
+	"Vector.h"
+
+1345162716 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/main.cpp
+	<iostream>
+	"include/RayCasting.h"
+	"include/Scene.h"
+
+1344463576 /home/viniciusbord9/Documentos/RayCasting/RayCasting/RayCasting.h
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<cstring>
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<CL/cl.h>
+	"Scene.h"
+	"Vector.h"
+	"Sphere.h"
+	"Ray.h"
+	"Camera.h"
+	"Util.h"
+	"Color.h"
+	"SceneObject.h"
+
+1345162674 source:/home/viniciusbord9/Documentos/RayCasting/RayCasting/RayCasting.cpp
+	"include/RayCasting.h"
+
+1340503576 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Camera.h
+	"Vector.h"
+	"Util.h"
+
+1338851401 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Vector.h
+
+1338850911 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Util.h
+	"Vector.h"
+	<math.h>
+
+1345162694 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/RayCasting.h
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<cstring>
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<CL/cl.h>
+	<CL/opencl.h>
+	<CL/cl_platform.h>
+	"Scene.h"
+	"Vector.h"
+	"Sphere.h"
+	"Ray.h"
+	"Camera.h"
+	"Util.h"
+	"Color.h"
+	"SceneObject.h"
+	"OpenCLUtil.h"
+
+1344392097 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Scene.h
+	<vector>
+	"SceneObject.h"
+	"Camera.h"
+	"Color.h"
+
+1344382826 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/SceneObject.h
+	<iostream>
+	"Color.h"
+	"Ray.h"
+
+1344383954 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Color.h
+
+1338851457 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Ray.h
+	"Vector.h"
+
+1340493476 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/Sphere.h
+	"SceneObject.h"
+	"Ray.h"
+	"Vector.h"
+	"Util.h"
+
+1345162764 /home/viniciusbord9/Documentos/RayCasting/RayCasting/include/OpenCLUtil.h
+	<CL/opencl.h>
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Camera.cpp
+	"include/Camera.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Camera.h
+	"Vector.h"
+	"Util.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Vector.h
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Util.h
+	"Vector.h"
+	<math.h>
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Image.cpp
+	"Image.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Ray.cpp
+	"Ray.h"
+
+1346811911 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/RayCasting.cpp
+	"include/RayCasting.h"
+
+1346809997 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<iostream>
+	<fstream>
+	"CL/cl.hpp"
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<CL/cl.h>
+	<CL/opencl.h>
+	<CL/cl_platform.h>
+	"Scene.h"
+	"Vector.h"
+	"Sphere.h"
+	"Ray.h"
+	"Camera.h"
+	"Util.h"
+	"Color.h"
+	"SceneObject.h"
+	"OpenCLUtil.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
+	<vector>
+	"SceneObject.h"
+	"Camera.h"
+	"Color.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/SceneObject.h
+	<iostream>
+	"Color.h"
+	"Ray.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Color.h
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
+	"Vector.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Sphere.h
+	"SceneObject.h"
+	"Ray.h"
+	"Vector.h"
+	"Util.h"
+
+1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/OpenCLUtil.h
+	<CL/opencl.h>
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Scene.cpp
+	"Scene.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/SceneObject.cpp
+	"SceneObject.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Sphere.cpp
+	"Sphere.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Util.cpp
+	"Util.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/Vector.cpp
+	"Vector.h"
+
+1345406829 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/main.cpp
+	<iostream>
+	"include/RayCasting.h"
+	"include/Scene.h"
+
+1345401629 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/OpenCLUtil.cpp
+	"../include/OpenCLUtil.h"
+
+1347073830 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Camera.cpp
+	"include/Camera.h"
+
+1347073843 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Camera.h
+	"Vector.h"
+	"Util.h"
+
+1347074156 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Vector.h
+	"Structs_OpenCL.h"
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Util.h
+	"Vector.h"
+	<math.h>
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Image.cpp
+	"Image.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Ray.cpp
+	"Ray.h"
+
+1347074714 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/RayCasting.cpp
+	"include/RayCasting.h"
+
+1347072900 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<iostream>
+	<fstream>
+	"CL/cl.hpp"
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<CL/cl.h>
+	<CL/opencl.h>
+	<CL/cl_platform.h>
+	<SDKCommon.hpp>
+	<SDKApplication.hpp>
+	<SDKCommandArgs.hpp>
+	<SDKFile.hpp>
+	"Structs_OpenCL.h"
+	"Scene.h"
+	"Vector.h"
+	"Sphere.h"
+	"Ray.h"
+	"Camera.h"
+	"Util.h"
+	"Color.h"
+	"SceneObject.h"
+	"OpenCLUtil.h"
+
+1347074561 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
+	<vector>
+	"Structs_OpenCL.h"
+	"SceneObject.h"
+	"Camera.h"
+	"Color.h"
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/SceneObject.h
+	<iostream>
+	"Color.h"
+	"Ray.h"
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Color.h
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
+	"Vector.h"
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Sphere.h
+	"SceneObject.h"
+	"Ray.h"
+	"Vector.h"
+	"Util.h"
+
+1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/OpenCLUtil.h
+	<CL/opencl.h>
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Scene.cpp
+	"Scene.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/SceneObject.cpp
+	"SceneObject.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Sphere.cpp
+	"Sphere.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Util.cpp
+	"Util.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/Vector.cpp
+	"Vector.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/main.cpp
+	<iostream>
+	"include/RayCasting.h"
+	"include/Scene.h"
+
+1346876766 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/OpenCLUtil.cpp
+	"../include/OpenCLUtil.h"
+
+1347074674 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Structs_OpenCL.h
+	<CL/cl.h>
+	<CL/opencl.h>
+	<CL/cl_platform.h>
+
