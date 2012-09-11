@@ -110,6 +110,12 @@ RayCasting::render(Scene *scene){
 int
 RayCasting::parallelRender(Scene *scene){
 
+    cl_uint pixelSize = sizeof(streamsdk::uchar4);
+
+    streamsdk::SDKBitMap inputBitmap;
+
+    streamsdk::uchar4* pixelData = inputBitmap.getPixels();
+
     /***************************************************************************************/
     /*****               Declarando as variáveis para criar o kernel                   *****/
     /***************************************************************************************/
@@ -155,40 +161,164 @@ RayCasting::parallelRender(Scene *scene){
     /***************************************************************************************/
     /*****                    Obtendo Texto do Kernel                                  *****/
     /***************************************************************************************/
-    std::ifstream file("kernel.cl");
+    std::ifstream file("src/render.cl");
 
-    /*while (file.good()){
+    streamsdk::SDKFile kernelFile;
+    std::string kernelPath = "src/render.cl";
+
+    if(!kernelFile.open(kernelPath.c_str()))
+    {
+        std::cout << "Failed to load kernel file : " << kernelPath << std::endl;
+        return SDK_FAILURE;
+    }
+
+    // create program source
+    cl::Program::Sources source(1, std::make_pair(kernelFile.source().data(), kernelFile.source().size()));
+
+    // Create program object
+    program = cl::Program(context, source, &err);
+    CHECK_OPENCL_ERROR(err, "Program::Program() failed.");
+
+    /**
+    while (file.good()){
         cout << (char) file.get();
     }
-    */
-    //file.close();
+    file.close();
 
     std::string prog(std::istreambuf_iterator<char>(file), (std::istreambuf_iterator<char>()));
 
     cl::Program::Sources source(1, std::make_pair(prog.c_str(),prog.length()+1));
 
-    program = cl::Program(context, source);
+    program = cl::Program(context, source, &err);
+    CHECK_OPENCL_ERROR(err, "Program::Program() failed.");*/
 
-    err = program.build(devices,"");
+    err = program.build(devices,"-w");
+    //CHECK_OPENCL_ERROR(err, "Program::build() failed.");
 
     if (err != CL_SUCCESS) {
         std::cout << "\n ERRO: ao criar o kernel" ;
+        if(err == CL_BUILD_PROGRAM_FAILURE)
+        {
+            std::string str = program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(devices[0]);
+
+            std::cout << " \n\t\t\tBUILD LOG\n";
+            std::cout << " ************************************************\n";
+            std::cout << str << std::endl;
+            std::cout << " ************************************************\n";
+        }
     }
 
-    kernel = cl::Kernel(program, "render");
+    kernel = cl::Kernel(program, "render", &err);
+    CHECK_OPENCL_ERROR(err, "Kernel::Kernel() failed.");
+
+    /**Criando imagem para passar como parâmetro*/
+    cl_uchar4 *outputImageData = (cl_uchar4*)malloc(this->width * this->height * sizeof(cl_uchar4));
+
+    CHECK_ALLOCATION(outputImageData, "Failed to allocate memory! (outputImageData)");
+
+    // initializa the Image data to NULL
+    memset(outputImageData, 0, width * height * pixelSize);
+
+    cl::Image2D outputImage2D = cl::Image2D(context,CL_MEM_WRITE_ONLY,cl::ImageFormat(CL_RGBA,CL_UNSIGNED_INT8),this->width,this->height,0, NULL, &err);
+    CHECK_OPENCL_ERROR(err, "cl::Image2D(...) failed.");
+
+    scene_struct *s = scene->cast_struct();
+    int w = this->width;
+    int h = this->height;
 
     cl::Buffer a = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(scene_struct));
     cl::Buffer b = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(int));
     cl::Buffer c = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(int));
+    //cl::Buffer d = cl::Buffer(context,CL_MEM_WRITE_ONLY,sizeof(this->width * this->height * sizeof(cl_uchar4)));
 
-    scene_struct *s = scene->cast_struct();
+    err = queue.enqueueWriteBuffer(a,CL_TRUE,0 , sizeof(scene_struct),s);
+    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(struct) failed.");
 
-    int w = this->width;
-    int h = this->height;
+    err = queue.enqueueWriteBuffer(b,CL_TRUE,0 , sizeof(int),&b);
+    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(width) failed.");
 
-    queue.enqueueWriteBuffer(a, CL_TRUE, 0, sizeof(scene_struct),s);
-    //queue.enqueueWriteBuffer(b, CL_TRUE, 0, sizeof(size_t), (void*) w);
-    //queue.enqueueWriteBuffer(c, CL_TRUE, 0, sizeof(size_t), (void*) h);
+    err = queue.enqueueWriteBuffer(c,CL_TRUE,0 , sizeof(int),&c);
+    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(height) failed.");
+
+    cl::size_t<3> origin;
+    origin[0] = 0;
+    origin[1] = 0;
+    origin[2] = 0;
+
+    cl::size_t<3> region;
+    region[0] = width;
+    region[1] = height;
+    region[2] = 1;
+
+    cl::Event writeEvt;
+
+    err = queue.enqueueWriteImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &writeEvt);
+    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(image) failed.");
+
+    cl_int status;
+
+    status = kernel.setArg(0,a);
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(0) failed.");
+
+    status = kernel.setArg(1,b);
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(1) failed.");
+
+    status = kernel.setArg(2,c);
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(2) failed.");
+
+    status = kernel.setArg(3, outputImage2D);
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(3) failed.");
+
+
+    size_t kernelWorkGroupSize = kernel.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(devices[0], &err);
+
+    cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
+
+    cl::NDRange global(512);
+    cl::NDRange local(1);
+
+    cl::Event ndrEvt;
+    status = queue.enqueueNDRangeKernel(kernel,NULL,global,local,0,&ndrEvt);
+    CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
+
+    origin[0] = 0;
+    origin[1] = 0;
+    origin[2] = 0;
+
+    region[0] = width;
+    region[1] = height;
+    region[2] = 1;
+
+    cl::Event readEvt;
+
+    status = queue.enqueueReadImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &readEvt);
+    CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
+
+    status = queue.flush();
+    CHECK_OPENCL_ERROR(status, "\n CommandQueue::flush() failed.");
+
+    cl_int eventStatus = CL_QUEUED;
+    while(eventStatus != CL_COMPLETE)
+    {
+        status = readEvt.getInfo<cl_int>(
+                    CL_EVENT_COMMAND_EXECUTION_STATUS,
+                    &eventStatus);
+        CHECK_OPENCL_ERROR(status, "cl:Event.getInfo(CL_EVENT_COMMAND_EXECUTION_STATUS) failed.");
+    }
+
+    cout << "\n\n imagem: " << sizeof(outputImageData) << "\n\n";
+
+    //memcpy(pixelData, outputImageData, this->width * this->height * sizeof(cl_uchar4));
+
+    // write the output bmp file
+    /*if(!inputBitmap.write(OUTPUT_IMAGE))
+    {
+        std::cout << "Failed to write output image!" << std::endl;
+        return SDK_FAILURE;
+    }*/
+
+
+    //queue.finish();
 
 	return 0;
 }

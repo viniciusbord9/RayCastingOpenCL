@@ -13,6 +13,7 @@
 #include <SDKApplication.hpp>
 #include <SDKCommandArgs.hpp>
 #include <SDKFile.hpp>
+#include <SDKBitMap.hpp>
 #include "Structs_OpenCL.h"
 #include "Scene.h"
 #include "Vector.h"
@@ -23,6 +24,8 @@
 #include "Color.h"
 #include "SceneObject.h"
 #include "OpenCLUtil.h"
+
+#define OUTPUT_IMAGE "RayCastingImage.bmp"
 
 using namespace std;
 

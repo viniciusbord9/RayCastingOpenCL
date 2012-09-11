@@ -35,10 +35,10 @@
 1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
 	"Vector.h"
 
-1347075054 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
+1347325966 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
 	"../include/RayCasting.h"
 
-1347072900 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
+1347311077 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
 	<cstdio>
 	<cstdlib>
 	<cstring>
@@ -54,6 +54,7 @@
 	<SDKApplication.hpp>
 	<SDKCommandArgs.hpp>
 	<SDKFile.hpp>
+	<SDKBitMap.hpp>
 	"Structs_OpenCL.h"
 	"Scene.h"
 	"Vector.h"
