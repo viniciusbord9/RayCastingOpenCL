@@ -35,14 +35,11 @@
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Color.h" />
 		<Unit filename="include/Image.h" />
-		<Unit filename="include/OpenCLUtil.h" />
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/RayCasting.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/SceneObject.h" />
 		<Unit filename="include/Sphere.h" />
-		<Unit filename="include/Structs_OpenCL" />
-		<Unit filename="include/Structs_OpenCL.h" />
 		<Unit filename="include/Util.h" />
 		<Unit filename="include/Vector.h" />
 		<Unit filename="src/Camera.cpp" />

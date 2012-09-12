@@ -1,19 +1,21 @@
 # depslib dependency file v1.0
-1347075023 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Camera.cpp
+1347412172 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Camera.cpp
 	"../include/Camera.h"
 
-1347073843 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Camera.h
+1347411856 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Camera.h
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<iostream>
+	<fstream>
+	"CL/cl.hpp"
 	"Vector.h"
 	"Util.h"
 
-1347075361 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Vector.h
+1347411384 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Vector.h
 	<stdlib.h>
-	"Structs_OpenCL.h"
 
-1347075301 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Structs_OpenCL.h
-	<CL/cl.h>
-	<CL/opencl.h>
-	<CL/cl_platform.h>
+1347404707 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Structs_OpenCL.h
 
 1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Util.h
 	"Vector.h"
@@ -35,10 +37,10 @@
 1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
 	"Vector.h"
 
-1347325966 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
+1347416824 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
 	"../include/RayCasting.h"
 
-1347311077 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
+1347416589 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
 	<cstdio>
 	<cstdlib>
 	<cstring>
@@ -55,7 +57,6 @@
 	<SDKCommandArgs.hpp>
 	<SDKFile.hpp>
 	<SDKBitMap.hpp>
-	"Structs_OpenCL.h"
 	"Scene.h"
 	"Vector.h"
 	"Sphere.h"
@@ -64,18 +65,22 @@
 	"Util.h"
 	"Color.h"
 	"SceneObject.h"
-	"OpenCLUtil.h"
 
-1347075102 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
+1347416318 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
 	<vector>
 	<stdlib.h>
-	"Structs_OpenCL.h"
 	"SceneObject.h"
 	"Camera.h"
 	"Color.h"
 
-1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/SceneObject.h
+1347414401 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/SceneObject.h
 	<iostream>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<iostream>
+	<fstream>
+	"CL/cl.hpp"
 	"Color.h"
 	"Ray.h"
 
@@ -90,8 +95,9 @@
 1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/OpenCLUtil.h
 	<CL/opencl.h>
 
-1347075294 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
+1347416312 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
 	"../include/Scene.h"
+	"../include/Sphere.h"
 
 1347075312 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/SceneObject.cpp
 	"../include/SceneObject.h"
@@ -102,10 +108,10 @@
 1347075327 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Util.cpp
 	"../include/Util.h"
 
-1347075335 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Vector.cpp
+1347405763 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Vector.cpp
 	"../include/Vector.h"
 
-1347075377 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
+1347416611 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
 	<iostream>
 	"../include/RayCasting.h"
 	"../include/Scene.h"

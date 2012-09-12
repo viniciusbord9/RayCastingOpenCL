@@ -1,4 +1,5 @@
 #include "../include/Scene.h"
+#include "../include/Sphere.h"
 
 
 Scene::Scene(color *background)
@@ -7,23 +8,32 @@ Scene::Scene(color *background)
 	this->background = background;
 }
 
+scene*
+Scene::cast_struct(){
+    scene *s = (scene*) malloc(sizeof(scene));
+    s->background[0] = this->background->R;
+    s->background[1] = this->background->G;
+    s->background[2] = this->background->B;
+    return s;
+}
+
+obj*
+Scene::cast_objects(){
+    obj* list_object = (obj*) malloc (this->objts->size()*sizeof(obj));
+    for(int i = 0; i < this->objts->size(); i++){
+        Sphere *obj = (Sphere*) this->objts->at(i);
+        cl_float3 center = {(cl_float) obj->center->x,(cl_float) obj->center->y, (cl_float) obj->center->z};
+        list_object[i].center = center;
+        list_object[i].radius = obj->radius;
+    }
+    return list_object;
+}
+
 
 Scene::~Scene(void)
 {
 }
 
-scene_struct*
-Scene::cast_struct(){
-    camera_struct *cam = (camera_struct*) malloc(sizeof(camera_struct));
-    cam->pos = this->camera->pos->cast_struct();
-    cam->forward = this->camera->forward->cast_struct();
-    cam->right = this->camera->right->cast_struct();
-    cam->up = this->camera->up->cast_struct();
-
-    scene_struct *s = (scene_struct*) malloc(sizeof(scene_struct));
-    s->c = cam;
-    return s;
-}
 
 vector<SceneObject*>*
 Scene::getObjects(){

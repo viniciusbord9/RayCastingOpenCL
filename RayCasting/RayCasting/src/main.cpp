@@ -7,7 +7,8 @@ using namespace std;
 int main(){
 	RayCasting raycasting(800,600);
 	Scene *scene = raycasting.sceneDefault;
-	if(raycasting.parallelRender(scene) == 0){
+
+	if(raycasting.parallelRender(scene->cast_struct(),scene->camera->cast_struct(), scene->cast_objects(), scene->getObjects()->size()) == 0){
         cout << "Renderizado";
 	}else{
         cout << "ERRO ao renderizar";

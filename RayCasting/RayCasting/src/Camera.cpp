@@ -11,6 +11,28 @@ Camera::Camera(Vector *pos, Vector *lookat)
 
 }
 
+camera*
+Camera::cast_struct(){
+    camera *c = (camera*) malloc(sizeof(camera));
+
+    c->pos.x = (cl_float) this->pos->x;
+    c->pos.y = (cl_float) this->pos->y;
+    c->pos.z = (cl_float) this->pos->z;
+
+    c->right.x = (cl_float) this->right->x;
+    c->right.y = (cl_float) this->right->y;
+    c->right.z = (cl_float) this->right->z;
+
+    c->up.x = (cl_float) this->up->x;
+    c->up.y = (cl_float) this->up->y;
+    c->up.z = (cl_float) this->up->z;
+
+    c->forward.x = (cl_float) this->forward->x;
+    c->forward.y = (cl_float) this->forward->y;
+    c->forward.z = (cl_float) this->forward->z;
+
+}
+
 
 Camera::~Camera(void)
 {
