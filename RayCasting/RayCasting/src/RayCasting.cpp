@@ -113,10 +113,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     cl_uint pixelSize = sizeof(streamsdk::uchar4);
 
-    streamsdk::SDKBitMap inputBitmap;
-
-    streamsdk::uchar4* pixelData = inputBitmap.getPixels();
-
     /***************************************************************************************/
     /*****               Declarando as variáveis para criar o kernel                   *****/
     /***************************************************************************************/
@@ -145,13 +141,26 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     /***************************************************************************************/
     iter = platforms.begin();
 
-    (*iter).getDevices(CL_DEVICE_TYPE_CPU,&devices);
+    (*iter).getDevices(CL_DEVICE_TYPE_GPU,&devices);
 
     context = cl::Context(devices,NULL, NULL, NULL,&err);
 
     if(err != CL_SUCCESS)
     {
         cout << "erro ao criar o contexto";
+    }
+
+    /****************************************************************************************/
+    /*********                  Verificando suporte a imagem                            *****/
+    /****************************************************************************************/
+    // Check for image support
+    cl_int imageSupport = devices[0].getInfo<CL_DEVICE_IMAGE_SUPPORT>(&err);
+    CHECK_OPENCL_ERROR(err, "Device::getInfo() failed.");
+
+    // If images are not supported then return
+    if(!imageSupport)
+    {
+        OPENCL_EXPECTED_ERROR("Images are not supported on this device!");
     }
 
     /***************************************************************************************/
@@ -217,11 +226,9 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     CHECK_ALLOCATION(outputImageData, "Failed to allocate memory! (outputImageData)");
 
-    // initializa the Image data to NULL
-    memset(outputImageData, 0, width * height * pixelSize);
-
     cl::Image2D outputImage2D = cl::Image2D(context,CL_MEM_WRITE_ONLY,cl::ImageFormat(CL_RGBA,CL_UNSIGNED_INT8),this->width,this->height,0, NULL, &err);
     CHECK_OPENCL_ERROR(err, "cl::Image2D(...) failed.");
+
 
     int w = this->width;
     int h = this->height;
@@ -254,14 +261,14 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     origin[2] = 0;
 
     cl::size_t<3> region;
-    region[0] = width;
-    region[1] = height;
+    region[0] = this->width;
+    region[1] = this->height;
     region[2] = 1;
 
     cl::Event writeEvt;
 
-    err = queue.enqueueWriteImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &writeEvt);
-    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(image) failed.");
+    /*err = queue.enqueueWriteImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &writeEvt);
+    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(image) failed.");*/
 
     cl_int status;
 
@@ -275,22 +282,22 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     CHECK_OPENCL_ERROR(status, "Kernel::setArg(2) failed.");
 
     status = kernel.setArg(3,d);
-    CHECK_OPENCL_ERROR(status, "Kernel::setArg(2) failed.");
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(3) failed.");
 
     status = kernel.setArg(4,e);
-    CHECK_OPENCL_ERROR(status, "Kernel::setArg(2) failed.");
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(4) failed.");
 
 
     status = kernel.setArg(5, outputImage2D);
-    CHECK_OPENCL_ERROR(status, "Kernel::setArg(3) failed.");
+    CHECK_OPENCL_ERROR(status, "Kernel::setArg(5) failed.");
 
 
     size_t kernelWorkGroupSize = kernel.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(devices[0], &err);
 
     cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
 
-    cl::NDRange global(512);
-    cl::NDRange local(1);
+    cl::NDRange global(800,600);
+    cl::NDRange local(16,8);
 
     cl::Event ndrEvt;
     status = queue.enqueueNDRangeKernel(kernel,NULL,global,local,0,&ndrEvt);
@@ -300,8 +307,8 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     origin[1] = 0;
     origin[2] = 0;
 
-    region[0] = width;
-    region[1] = height;
+    region[0] = this->width;
+    region[1] = this->height;
     region[2] = 1;
 
     cl::Event readEvt;
@@ -321,19 +328,39 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         CHECK_OPENCL_ERROR(status, "cl:Event.getInfo(CL_EVENT_COMMAND_EXECUTION_STATUS) failed.");
     }
 
-    cout << "\n\n imagem: " << sizeof(outputImageData) << "\n\n";
 
-    //memcpy(pixelData, outputImageData, this->width * this->height * sizeof(cl_uchar4));
+    /*unsigned int *pt = (unsigned int*) malloc(w*h*sizeof(unsigned int));
 
-    // write the output bmp file
-    /*if(!inputBitmap.write(OUTPUT_IMAGE))
-    {
-        std::cout << "Failed to write output image!" << std::endl;
-        return SDK_FAILURE;
+    memset(pt,0,w*h*sizeof(unsigned int));
+
+    if(!bitmap.write(OUTPUT_IMAGE,w,h,pt)){
+        cout << "erro ao escrever imagem";
     }*/
 
+    streamsdk::SDKBitMap bitmap;
 
-    //queue.finish();
+    bitmap.load(OUTPUT_IMAGE);
+    if(!bitmap.isLoaded()){
+        cout << "erro ao carregar imagem";
+    }
+
+    streamsdk::uchar4* pixelData = bitmap.getPixels();
+
+    memcpy(pixelData, outputImageData, w * h * pixelSize);
+
+    if(!bitmap.write(OUTPUT_IMAGE)){
+        cout << "erro ao escrever imagem";
+    }
+
+    /*int i = 0;
+    while(i < 50000){
+        unsigned char R = (*pixelData++).x;
+        unsigned char G = (*pixelData++).x;
+        unsigned char B = (*pixelData++).x;
+        cout << "\n pixel" << R;
+    }*/
+
+    free(outputImageData);
 
 	return 0;
 }

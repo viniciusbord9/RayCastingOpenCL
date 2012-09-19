@@ -31,6 +31,8 @@ Camera::cast_struct(){
     c->forward.y = (cl_float) this->forward->y;
     c->forward.z = (cl_float) this->forward->z;
 
+    return c;
+
 }
 
 

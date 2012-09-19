@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "CL/cl.hpp"
+#include "CL/cl.h"
 #include "Vector.h"
 #include "Util.h"
 
