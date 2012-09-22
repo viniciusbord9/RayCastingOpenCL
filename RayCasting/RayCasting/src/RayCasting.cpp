@@ -57,11 +57,13 @@ RayCasting::recenter_y(int y){
 
 Vector*
 RayCasting::getPoint(int x, int y, Camera *camera){
+    cout << "\n " << this->recenter_x(x);
 	Vector *v1 = Util::mult_scalar(camera->right,this->recenter_x(x));
 	Vector *v2 = Util::mult_scalar(camera->up,this->recenter_y(y));
 	Vector *v3 = Util::plus(v1,v2);
 	v3 = Util::plus(camera->forward,v3);
 	Vector *v4 = Util::normal(v3);
+	//cout << "\n direction " << v1->x << ", " << v1->y << ", " << v1->z;
 	return v4;
 }
 
@@ -94,6 +96,8 @@ RayCasting::render(Scene *scene){
 			Ray *r = new Ray();
 			r->origin = scene->camera->pos;
 			r->direction = this->getPoint(i,j,scene->camera);
+            //cout << "\n direction " << r->direction->x << ", " << r->direction->y << ", " << r->direction->z;
+			//cout << "\n direction " << scene->camera->right->x << ", " << scene->camera->right->y << ", " << scene->camera->right->z;
 			color *cor = this->traceRay(r,scene,0);
             al_set_target_bitmap(this->bitmap);
             al_put_pixel(i, j,  al_map_rgb(cor->R, cor->G, cor->B));
@@ -229,14 +233,14 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cl::Image2D outputImage2D = cl::Image2D(context,CL_MEM_WRITE_ONLY,cl::ImageFormat(CL_RGBA,CL_UNSIGNED_INT8),this->width,this->height,0, NULL, &err);
     CHECK_OPENCL_ERROR(err, "cl::Image2D(...) failed.");
 
-    int w = this->width;
-    int h = this->height;
+    cl_int w = this->width;
+    cl_int h = this->height;
 
     cl::Buffer a = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(scene));
     cl::Buffer b = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(camera));
     cl::Buffer c = cl::Buffer(context,CL_MEM_READ_ONLY, qtde_objects * sizeof(obj));
-    cl::Buffer d = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(int));
-    cl::Buffer e = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(int));
+    //cl::Buffer d = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(cl_int));
+    //cl::Buffer e = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(cl_int));
     //cl::Buffer d = cl::Buffer(context,CL_MEM_WRITE_ONLY,sizeof(this->width * this->height * sizeof(cl_uchar4)));
 
     err = queue.enqueueWriteBuffer(a,CL_TRUE,0 , sizeof(scene),s);
@@ -248,11 +252,11 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     err = queue.enqueueWriteBuffer(c,CL_TRUE,0 , qtde_objects * sizeof(obj),list_objects);
     CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(obj) failed.");
 
-    err = queue.enqueueWriteBuffer(d,CL_TRUE,0 , sizeof(int),&w);
-    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(width) failed.");
+    //err = queue.enqueueWriteBuffer(d,CL_TRUE,0 , sizeof(cl_int),&w);
+    //CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(width) failed.");
 
-    err = queue.enqueueWriteBuffer(e,CL_TRUE,0 , sizeof(int),&h);
-    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(height) failed.");
+    //err = queue.enqueueWriteBuffer(e,CL_TRUE,0 , sizeof(cl_int),&h);
+    //CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(height) failed.");
 
     cl::size_t<3> origin;
     origin[0] = 0;
@@ -280,10 +284,10 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     status = kernel.setArg(2,c);
     CHECK_OPENCL_ERROR(status, "Kernel::setArg(2) failed.");
 
-    status = kernel.setArg(3,d);
+    status = kernel.setArg(3,w);
     CHECK_OPENCL_ERROR(status, "Kernel::setArg(3) failed.");
 
-    status = kernel.setArg(4,e);
+    status = kernel.setArg(4,h);
     CHECK_OPENCL_ERROR(status, "Kernel::setArg(4) failed.");
 
 
