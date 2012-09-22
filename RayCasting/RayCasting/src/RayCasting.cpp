@@ -141,7 +141,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     /***************************************************************************************/
     iter = platforms.begin();
 
-    (*iter).getDevices(CL_DEVICE_TYPE_GPU,&devices);
+    (*iter).getDevices(CL_DEVICE_TYPE_CPU,&devices);
 
     context = cl::Context(devices,NULL, NULL, NULL,&err);
 
@@ -229,7 +229,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cl::Image2D outputImage2D = cl::Image2D(context,CL_MEM_WRITE_ONLY,cl::ImageFormat(CL_RGBA,CL_UNSIGNED_INT8),this->width,this->height,0, NULL, &err);
     CHECK_OPENCL_ERROR(err, "cl::Image2D(...) failed.");
 
-
     int w = this->width;
     int h = this->height;
 
@@ -297,10 +296,10 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
 
     cl::NDRange global(800,600);
-    cl::NDRange local(16,8);
+    cl::NDRange local(200,1);
 
     cl::Event ndrEvt;
-    status = queue.enqueueNDRangeKernel(kernel,NULL,global,local,0,&ndrEvt);
+    status = queue.enqueueNDRangeKernel(kernel,cl::NullRange,global,local,0,&ndrEvt);
     CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
 
     origin[0] = 0;
@@ -328,15 +327,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         CHECK_OPENCL_ERROR(status, "cl:Event.getInfo(CL_EVENT_COMMAND_EXECUTION_STATUS) failed.");
     }
 
-
-    /*unsigned int *pt = (unsigned int*) malloc(w*h*sizeof(unsigned int));
-
-    memset(pt,0,w*h*sizeof(unsigned int));
-
-    if(!bitmap.write(OUTPUT_IMAGE,w,h,pt)){
-        cout << "erro ao escrever imagem";
-    }*/
-
     streamsdk::SDKBitMap bitmap;
 
     bitmap.load(OUTPUT_IMAGE);
@@ -352,15 +342,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         cout << "erro ao escrever imagem";
     }
 
-    /*int i = 0;
-    while(i < 50000){
-        unsigned char R = (*pixelData++).x;
-        unsigned char G = (*pixelData++).x;
-        unsigned char B = (*pixelData++).x;
-        cout << "\n pixel" << R;
-    }*/
-
-    free(outputImageData);
+   free(outputImageData);
 
 	return 0;
 }

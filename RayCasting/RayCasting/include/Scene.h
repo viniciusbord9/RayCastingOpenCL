@@ -9,11 +9,13 @@ using namespace std;
 
 typedef struct Object{
     cl_float3 center;
+    cl_uint4 color;
     float radius;
 }obj;
 
 typedef struct S{
-    unsigned int background[3];
+    int count_objects;
+    cl_uint4 background;
 }scene;
 
 class Scene

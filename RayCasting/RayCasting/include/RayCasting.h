@@ -23,7 +23,7 @@
 #include "Color.h"
 #include "SceneObject.h"
 
-#define OUTPUT_IMAGE "RayCastingImage.bmp"
+#define OUTPUT_IMAGE "imagem.bmp"
 
 using namespace std;
 

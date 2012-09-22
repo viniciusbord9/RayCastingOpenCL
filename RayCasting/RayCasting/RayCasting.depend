@@ -153,10 +153,10 @@
 1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
 	"Vector.h"
 
-1348029231 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
+1348273783 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
 	"../include/RayCasting.h"
 
-1347493233 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
+1348101197 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
 	<cstdio>
 	<cstdlib>
 	<cstring>
@@ -182,7 +182,7 @@
 	"Color.h"
 	"SceneObject.h"
 
-1347493233 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
+1348242671 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Scene.h
 	<vector>
 	<stdlib.h>
 	"SceneObject.h"
@@ -208,7 +208,7 @@
 	"Vector.h"
 	"Util.h"
 
-1347493233 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
+1348270367 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
 	"../include/Scene.h"
 	"../include/Sphere.h"
 
@@ -224,7 +224,7 @@
 1347493233 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Vector.cpp
 	"../include/Vector.h"
 
-1347493233 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
+1348274294 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
 	<iostream>
 	"../include/RayCasting.h"
 	"../include/Scene.h"
