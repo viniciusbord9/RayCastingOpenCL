@@ -69,15 +69,14 @@ __kernel void render(__global scene *s,__global camera *c,__global obj *list_obj
     //printf("\n %f %f %f",c->forward.x, c->forward.y, c->forward.z);
     float3 v1 = getPoint((float) width,(float) height,(float) coord.x,(float) coord.y,*c);
     ray r = {c->pos, v1};
-    int i = 0;
+    size_t i = 0;
     uint4 color;
     //printf("\n%f, %f, %f ", v1.x, v1.y, v1.z);
+    color = (uint4) ((uint) s->background.x , (uint) s->background.y, (uint) s->background.z, (uint) s->background.w);
     while(i < s->count_objects){
+        //printf("%d",i);
         if(intersect(r,list_objects[i]) == 1){
-             //printf("achou");
-             color = (uint4) ((uint) list_objects[i].color.x , (uint) list_objects[i].color.y, (uint) list_objects[i].color.z, list_objects[i].color.w);
-        }else{
-             color = (uint4) ((uint) s->background.x , (uint) s->background.y, (uint) s->background.z, (uint) s->background.w);
+             color = (uint4) ((uint) list_objects[i].color.x + color.x , (uint) list_objects[i].color.y + color.y, (uint) list_objects[i].color.z + color.z, list_objects[i].color.w + color.w);
         }
         i++;
     }

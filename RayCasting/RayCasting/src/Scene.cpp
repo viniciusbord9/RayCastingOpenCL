@@ -34,8 +34,6 @@ Scene::cast_objects(){
         int B = (cl_uint) obj->cor->B;
         cl_uint4 color = {(cl_uint) R , (cl_uint) G, (cl_uint) B , (cl_uint) 0};
         list_object[i].color = color;
-
-
     }
     return list_object;
 }
