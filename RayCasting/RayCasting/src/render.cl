@@ -64,14 +64,12 @@ float3 getPoint(float width, float height, float x, float y,camera c)
 __kernel void render(__global scene *s,__global camera *c,__global obj *list_objects,const int width,const int height,__write_only image2d_t image)
 {
     int2 coord = (int2) (get_global_id(0),get_global_id(1));
-    //printf("\n %d", width);
     //write_imageui(image,coord,(uint4)(255, 0, 0, 1));
     //printf("\n %f %f %f",c->forward.x, c->forward.y, c->forward.z);
     float3 v1 = getPoint((float) width,(float) height,(float) coord.x,(float) coord.y,*c);
     ray r = {c->pos, v1};
     int i = 0;
     uint4 color;
-    //printf("\n%f, %f, %f ", v1.x, v1.y, v1.z);
     while(i < s->count_objects){
         if(intersect(r,list_objects[i]) == 1){
              //printf("achou");

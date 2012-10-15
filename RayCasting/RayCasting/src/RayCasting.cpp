@@ -35,8 +35,8 @@ RayCasting::initSceneDefault(){
 	Sphere *sphere = new Sphere(origin, 0.5);
 	color *spherecolor = (color*) malloc(sizeof(color));
 	spherecolor->R = 0x0;
-	spherecolor->G = 0x0;
-	spherecolor->B = 0xff;
+	spherecolor->G = 0xff;
+	spherecolor->B = 0x0;
 	sphere->cor = spherecolor;
 	vector<SceneObject*> *l = scene->objts;
 	l->push_back((SceneObject*) sphere);
