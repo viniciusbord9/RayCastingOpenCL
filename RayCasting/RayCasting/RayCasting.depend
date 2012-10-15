@@ -38,7 +38,7 @@
 1348365437 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
 	"Vector.h"
 
-1348694674 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
+1350324063 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
 	"../include/RayCasting.h"
 
 1348365437 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
@@ -96,7 +96,7 @@
 1346876766 /home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/include/OpenCLUtil.h
 	<CL/opencl.h>
 
-1348365437 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
+1350321542 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
 	"../include/Scene.h"
 	"../include/Sphere.h"
 
@@ -112,7 +112,7 @@
 1348365437 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/Vector.cpp
 	"../include/Vector.h"
 
-1348365437 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
+1350324052 source:/home/viniciusbord9/Documentos/Repositorio/TCC/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
 	<iostream>
 	"../include/RayCasting.h"
 	"../include/Scene.h"
@@ -154,7 +154,7 @@
 1345401629 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/Ray.h
 	"Vector.h"
 
-1348283852 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
+1349752983 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/RayCasting.cpp
 	"../include/RayCasting.h"
 
 1348101197 /home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/include/RayCasting.h
@@ -209,7 +209,7 @@
 	"Vector.h"
 	"Util.h"
 
-1348270367 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
+1349751539 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Scene.cpp
 	"../include/Scene.h"
 	"../include/Sphere.h"
 
@@ -225,7 +225,7 @@
 1347493233 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/Vector.cpp
 	"../include/Vector.h"
 
-1348282862 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
+1349751521 source:/home/viniciusbord9/Documentos/Projetos/RayCastingOpenCL/RayCasting/RayCasting/src/main.cpp
 	<iostream>
 	"../include/RayCasting.h"
 	"../include/Scene.h"

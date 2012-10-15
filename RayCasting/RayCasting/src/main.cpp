@@ -10,15 +10,15 @@ int main(){
 
 
 	if(raycasting.parallelRender(scene->cast_struct(),scene->camera->cast_struct(), scene->cast_objects(), scene->getObjects()->size()) == 0){
-        cout << "Renderizado";
+        cout << "\nRenderizado";
 	}else{
-        cout << "ERRO ao renderizar";
+        cout << "\nERRO ao renderizar";
 	}
-	/*if(raycasting.render(scene)==0){
-        cout << "Imagem criada";
+	if(raycasting.render(scene)==0){
+        cout << "\nRenderizado";
 	}
 	else{
-        cout << "ERRO ao renderizar";
-	}*/
+        cout << "\nERRO ao renderizar";
+	}
     return 0;
 }

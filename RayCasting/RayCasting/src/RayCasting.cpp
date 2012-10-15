@@ -32,14 +32,25 @@ RayCasting::initSceneDefault(){
 	background->B = 0x0;
 	Scene *scene = new Scene(background);
 	Vector *origin = new Vector(0,1,0);
-	Sphere *sphere = new Sphere(origin, 0.5);
+	Sphere *sphere = new Sphere(origin, 0.3);
 	color *spherecolor = (color*) malloc(sizeof(color));
 	spherecolor->R = 0x0;
 	spherecolor->G = 0xff;
 	spherecolor->B = 0x0;
 	sphere->cor = spherecolor;
+	spherecolor->G = 0x0;
+	spherecolor->B = 0xff;
+	sphere->cor = spherecolor;
+    Vector *origin1 = new Vector(1,1,0);
+	Sphere *sphere1 = new Sphere(origin1, 0.2);
+	color *spherecolor1 = (color*) malloc(sizeof(color));
+	spherecolor1->R = 0xff;
+	spherecolor1->G = 0x0;
+	spherecolor1->B = 0x0;
+	sphere1->cor = spherecolor1;
 	vector<SceneObject*> *l = scene->objts;
 	l->push_back((SceneObject*) sphere);
+	l->push_back((SceneObject*) sphere1);
 	scene->camera = new Camera(new Vector(3,2,0),new Vector(-1.0,0.5,0.0));
 	return scene;
 }
@@ -57,13 +68,11 @@ RayCasting::recenter_y(int y){
 
 Vector*
 RayCasting::getPoint(int x, int y, Camera *camera){
-    cout << "\n " << this->recenter_x(x);
 	Vector *v1 = Util::mult_scalar(camera->right,this->recenter_x(x));
 	Vector *v2 = Util::mult_scalar(camera->up,this->recenter_y(y));
 	Vector *v3 = Util::plus(v1,v2);
 	v3 = Util::plus(camera->forward,v3);
 	Vector *v4 = Util::normal(v3);
-	//cout << "\n direction " << v1->x << ", " << v1->y << ", " << v1->z;
 	return v4;
 }
 
@@ -91,24 +100,28 @@ RayCasting::minIntersect(Ray *r, Scene *scene){
 
 int
 RayCasting::render(Scene *scene){
+    streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
+    int timer = sampleCommon->createTimer();
+    sampleCommon->resetTimer(timer);
+    sampleCommon->startTimer(timer);
 	for(int i = 0; i < this->width; i++){
 		for(int j = 0 ; j < this->height; j++){
 			Ray *r = new Ray();
 			r->origin = scene->camera->pos;
 			r->direction = this->getPoint(i,j,scene->camera);
-            //cout << "\n direction " << r->direction->x << ", " << r->direction->y << ", " << r->direction->z;
-			//cout << "\n direction " << scene->camera->right->x << ", " << scene->camera->right->y << ", " << scene->camera->right->z;
 			color *cor = this->traceRay(r,scene,0);
-            al_set_target_bitmap(this->bitmap);
-            al_put_pixel(i, j,  al_map_rgb(cor->R, cor->G, cor->B));
+            //al_set_target_bitmap(this->bitmap);
+            //al_put_pixel(i, j,  al_map_rgb(cor->R, cor->G, cor->B));
 		}
 	}
-	//bool init_addon = al_init_image_addon();
-	bool saved = al_save_bitmap("imagem.bmp",this->bitmap);
-	if(!saved){
+    sampleCommon->stopTimer(timer);
+    double time = (double)(sampleCommon->readTimer(timer));
+    cout << "\nTempo de renderizacao sequencial: " << time;
+	//bool saved = al_save_bitmap("imagemSequencial.bmp",this->bitmap);
+	/*if(!saved){
         al_destroy_bitmap(this->bitmap);
         return -1;
-	}
+	}*/
 	return 0;
 }
 
@@ -302,6 +315,11 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cl::NDRange global(800,600);
     cl::NDRange local(200,1);
 
+    streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
+    int timer = sampleCommon->createTimer();
+    sampleCommon->resetTimer(timer);
+    sampleCommon->startTimer(timer);
+
     cl::Event ndrEvt;
     status = queue.enqueueNDRangeKernel(kernel,cl::NullRange,global,local,0,&ndrEvt);
     CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
@@ -331,11 +349,14 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         CHECK_OPENCL_ERROR(status, "cl:Event.getInfo(CL_EVENT_COMMAND_EXECUTION_STATUS) failed.");
     }
 
+    sampleCommon->stopTimer(timer);
+    double time = (double)(sampleCommon->readTimer(timer));
+    cout << "\nTempo de renderizacao paralelo: " << time;
     streamsdk::SDKBitMap bitmap;
 
     bitmap.load(OUTPUT_IMAGE);
     if(!bitmap.isLoaded()){
-        cout << "erro ao carregar imagem";
+        cout << "\nerro ao carregar imagem";
     }
 
     streamsdk::uchar4* pixelData = bitmap.getPixels();
@@ -343,7 +364,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     memcpy(pixelData, outputImageData, w * h * pixelSize);
 
     if(!bitmap.write(OUTPUT_IMAGE)){
-        cout << "erro ao escrever imagem";
+        cout << "\nerro ao escrever imagem";
     }
 
    free(outputImageData);
