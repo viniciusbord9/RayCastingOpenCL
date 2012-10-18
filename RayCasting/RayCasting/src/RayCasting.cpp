@@ -31,16 +31,16 @@ RayCasting::initSceneDefault(){
 	background->G = 0x0;
 	background->B = 0x0;
 	Scene *scene = new Scene(background);
+	/*esfera 1*/
 	Vector *origin = new Vector(0,1,0);
-	Sphere *sphere = new Sphere(origin, 0.3);
+	Sphere *sphere = new Sphere(origin, 0.2);
 	color *spherecolor = (color*) malloc(sizeof(color));
 	spherecolor->R = 0x0;
 	spherecolor->G = 0xff;
 	spherecolor->B = 0x0;
 	sphere->cor = spherecolor;
-	spherecolor->G = 0x0;
-	spherecolor->B = 0xff;
-	sphere->cor = spherecolor;
+
+	/*esfera 2*/
     Vector *origin1 = new Vector(1,1,0);
 	Sphere *sphere1 = new Sphere(origin1, 0.2);
 	color *spherecolor1 = (color*) malloc(sizeof(color));
@@ -48,9 +48,31 @@ RayCasting::initSceneDefault(){
 	spherecolor1->G = 0x0;
 	spherecolor1->B = 0x0;
 	sphere1->cor = spherecolor1;
+
+	/*esfera 3*/
+	Vector *origin2 = new Vector(0.5,1,-0.2);
+	Sphere *sphere2 = new Sphere(origin2, 0.2);
+	color *spherecolor2 = (color*) malloc(sizeof(color));
+	spherecolor2->R = 0x0;
+	spherecolor2->G = 0x0;
+	spherecolor2->B = 0xff;
+	sphere2->cor = spherecolor2;
+
+	/*esfera 4*/
+	Vector *origin3 = new Vector(0.5,1,0.5);
+	Sphere *sphere3 = new Sphere(origin3, 0.2);
+	color *spherecolor3 = (color*) malloc(sizeof(color));
+	spherecolor3->R = 0xff;
+	spherecolor3->G = 0xaf;
+	spherecolor3->B = 0xaf;
+	sphere3->cor = spherecolor3;
+
 	vector<SceneObject*> *l = scene->objts;
 	l->push_back((SceneObject*) sphere);
 	l->push_back((SceneObject*) sphere1);
+	l->push_back((SceneObject*) sphere2);
+	l->push_back((SceneObject*) sphere3);
+
 	scene->camera = new Camera(new Vector(3,2,0),new Vector(-1.0,0.5,0.0));
 	return scene;
 }
