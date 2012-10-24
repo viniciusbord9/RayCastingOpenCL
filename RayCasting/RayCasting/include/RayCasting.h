@@ -48,5 +48,6 @@ private:
 	int width;
 	int height;
 	ALLEGRO_BITMAP *bitmap;
+    streamsdk::SDKCommon *sampleCommon;
 };
 

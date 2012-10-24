@@ -7,10 +7,10 @@
 	<File name="include/Color.h" open="0" top="0" tabpos="9">
 		<Cursor position="96" topLine="0" />
 	</File>
-	<File name="include/RayCasting.h" open="1" top="0" tabpos="8">
-		<Cursor position="608" topLine="6" />
+	<File name="include/RayCasting.h" open="1" top="0" tabpos="4">
+		<Cursor position="1261" topLine="27" />
 	</File>
-	<File name="include/Scene.h" open="1" top="0" tabpos="7">
+	<File name="include/Scene.h" open="0" top="0" tabpos="7">
 		<Cursor position="491" topLine="7" />
 	</File>
 	<File name="include/SceneObject.h" open="0" top="0" tabpos="10">
@@ -34,28 +34,28 @@
 	<File name="src/Ray.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="21" topLine="0" />
 	</File>
-	<File name="src/RayCasting.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="1848" topLine="55" />
+	<File name="src/RayCasting.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="2811" topLine="87" />
 	</File>
-	<File name="src/Scene.cpp" open="1" top="0" tabpos="6">
+	<File name="src/Scene.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="494" topLine="12" />
 	</File>
 	<File name="src/SceneObject.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="21" topLine="0" />
 	</File>
-	<File name="src/Sphere.cpp" open="1" top="0" tabpos="3">
+	<File name="src/Sphere.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="486" topLine="0" />
 	</File>
-	<File name="src/Util.cpp" open="1" top="0" tabpos="5">
+	<File name="src/Util.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1038" topLine="12" />
 	</File>
 	<File name="src/Vector.cpp" open="0" top="0" tabpos="12">
 		<Cursor position="171" topLine="0" />
 	</File>
 	<File name="src/main.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="493" topLine="0" />
+		<Cursor position="228" topLine="4" />
 	</File>
-	<File name="src/render.cl" open="1" top="0" tabpos="4">
-		<Cursor position="1658" topLine="58" />
+	<File name="src/render.cl" open="1" top="0" tabpos="3">
+		<Cursor position="1931" topLine="58" />
 	</File>
 </CodeBlocks_layout_file>

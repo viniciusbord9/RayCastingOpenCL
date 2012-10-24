@@ -80,5 +80,4 @@ __kernel void render(__global scene *s,__global camera *c,__global obj *list_obj
         i++;
     }
     write_imageui(image,coord,color);
-    //write_imageui(image,coord,(uint4)(0, 255, 0, 1));
 }

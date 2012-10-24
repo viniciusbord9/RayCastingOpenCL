@@ -6,6 +6,7 @@ int testeOpenCL();
 
 RayCasting::RayCasting(const int width, const int height)
 {
+    this->sampleCommon = new streamsdk::SDKCommon();
 	this->width = width;
 	this->height = height;
 	this->sceneDefault = RayCasting::initSceneDefault();
@@ -67,11 +68,91 @@ RayCasting::initSceneDefault(){
 	spherecolor3->B = 0xaf;
 	sphere3->cor = spherecolor3;
 
+	/*esfera 5*/
+	Vector *origin4 = new Vector(0.5,1,0.2);
+	Sphere *sphere4 = new Sphere(origin4, 0.2);
+	color *spherecolor4 = (color*) malloc(sizeof(color));
+	spherecolor4->R = 0x0;
+	spherecolor4->G = 0x0;
+	spherecolor4->B = 0xff;
+	sphere4->cor = spherecolor4;
+
+	/*esfera 6*/
+	Vector *origin5 = new Vector(0.5,1,0.5);
+	Sphere *sphere5 = new Sphere(origin5, 0.2);
+	color *spherecolor5 = (color*) malloc(sizeof(color));
+	spherecolor5->R = 0xff;
+	spherecolor5->G = 0xaf;
+	spherecolor5->B = 0xaf;
+	sphere5->cor = spherecolor5;
+
+	/*esfera 7*/
+	Vector *origin6 = new Vector(0,1,1);
+	Sphere *sphere6 = new Sphere(origin6, 0.2);
+	color *spherecolor6 = (color*) malloc(sizeof(color));
+	spherecolor6->R = 0x0;
+	spherecolor6->G = 0xff;
+	spherecolor6->B = 0x0;
+	sphere6->cor = spherecolor6;
+
+	/*esfera 8*/
+    Vector *origin7 = new Vector(1,1,-0.7);
+	Sphere *sphere7 = new Sphere(origin7, 0.2);
+	color *spherecolor7 = (color*) malloc(sizeof(color));
+	spherecolor7->R = 0xff;
+	spherecolor7->G = 0x0;
+	spherecolor7->B = 0x0;
+	sphere7->cor = spherecolor7;
+
+	/*esfera 9*/
+	Vector *origin8 = new Vector(0.5,0.5,-0.2);
+	Sphere *sphere8 = new Sphere(origin8, 0.2);
+	color *spherecolor8 = (color*) malloc(sizeof(color));
+	spherecolor8->R = 0x0;
+	spherecolor8->G = 0x0;
+	spherecolor8->B = 0xff;
+	sphere8->cor = spherecolor8;
+
+	/*esfera 10*/
+	Vector *origin9 = new Vector(0.5,0.5,-0.5);
+	Sphere *sphere9 = new Sphere(origin9, 0.2);
+	color *spherecolor9 = (color*) malloc(sizeof(color));
+	spherecolor9->R = 0xff;
+	spherecolor9->G = 0xaf;
+	spherecolor9->B = 0x00;
+	sphere9->cor = spherecolor9;
+
+	/*esfera 11*/
+	Vector *origin10 = new Vector(0,1,0.2);
+	Sphere *sphere10 = new Sphere(origin10, 0.2);
+	color *spherecolor10 = (color*) malloc(sizeof(color));
+	spherecolor10->R = 0x0;
+	spherecolor10->G = 0xaf;
+	spherecolor10->B = 0xbf;
+	sphere10->cor = spherecolor10;
+
+	/*esfera 12*/
+	Vector *origin11 = new Vector(1.2,1,0.5);
+	Sphere *sphere11 = new Sphere(origin11, 0.2);
+	color *spherecolor11 = (color*) malloc(sizeof(color));
+	spherecolor11->R = 0xff;
+	spherecolor11->G = 0xaf;
+	spherecolor11->B = 0xaf;
+	sphere11->cor = spherecolor11;
+
 	vector<SceneObject*> *l = scene->objts;
 	l->push_back((SceneObject*) sphere);
 	l->push_back((SceneObject*) sphere1);
 	l->push_back((SceneObject*) sphere2);
 	l->push_back((SceneObject*) sphere3);
+    l->push_back((SceneObject*) sphere4);
+	l->push_back((SceneObject*) sphere5);
+    l->push_back((SceneObject*) sphere6);
+	l->push_back((SceneObject*) sphere7);
+	l->push_back((SceneObject*) sphere8);
+    l->push_back((SceneObject*) sphere9);
+	l->push_back((SceneObject*) sphere10);
+    l->push_back((SceneObject*) sphere11);
 
 	scene->camera = new Camera(new Vector(3,2,0),new Vector(-1.0,0.5,0.0));
 	return scene;
@@ -122,10 +203,9 @@ RayCasting::minIntersect(Ray *r, Scene *scene){
 
 int
 RayCasting::render(Scene *scene){
-    streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
-    int timer = sampleCommon->createTimer();
-    sampleCommon->resetTimer(timer);
-    sampleCommon->startTimer(timer);
+    int timer = this->sampleCommon->createTimer();
+    this->sampleCommon->resetTimer(timer);
+    this->sampleCommon->startTimer(timer);
 	for(int i = 0; i < this->width; i++){
 		for(int j = 0 ; j < this->height; j++){
 			Ray *r = new Ray();
@@ -136,9 +216,9 @@ RayCasting::render(Scene *scene){
             //al_put_pixel(i, j,  al_map_rgb(cor->R, cor->G, cor->B));
 		}
 	}
-    sampleCommon->stopTimer(timer);
-    double time = (double)(sampleCommon->readTimer(timer));
-    cout << "\nTempo de renderizacao sequencial: " << time;
+    this->sampleCommon->stopTimer(timer);
+    double time = (double)(this->sampleCommon->readTimer(timer));
+    cout << "\n" << time;
 	//bool saved = al_save_bitmap("imagemSequencial.bmp",this->bitmap);
 	/*if(!saved){
         al_destroy_bitmap(this->bitmap);
@@ -172,7 +252,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     for(iter = platforms.begin(); iter != platforms.end(); ++iter)
     {
-        cout << "plataformas " << (*iter).getInfo<CL_PLATFORM_VENDOR>().c_str();
+        //cout << "plataformas " << (*iter).getInfo<CL_PLATFORM_VENDOR>().c_str();
     }
 
     /***************************************************************************************/
@@ -274,9 +354,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cl::Buffer a = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(scene));
     cl::Buffer b = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(camera));
     cl::Buffer c = cl::Buffer(context,CL_MEM_READ_ONLY, qtde_objects * sizeof(obj));
-    //cl::Buffer d = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(cl_int));
-    //cl::Buffer e = cl::Buffer(context,CL_MEM_READ_ONLY, sizeof(cl_int));
-    //cl::Buffer d = cl::Buffer(context,CL_MEM_WRITE_ONLY,sizeof(this->width * this->height * sizeof(cl_uchar4)));
 
     err = queue.enqueueWriteBuffer(a,CL_TRUE,0 , sizeof(scene),s);
     CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(scene) failed.");
@@ -287,11 +364,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     err = queue.enqueueWriteBuffer(c,CL_TRUE,0 , qtde_objects * sizeof(obj),list_objects);
     CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(obj) failed.");
 
-    //err = queue.enqueueWriteBuffer(d,CL_TRUE,0 , sizeof(cl_int),&w);
-    //CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(width) failed.");
-
-    //err = queue.enqueueWriteBuffer(e,CL_TRUE,0 , sizeof(cl_int),&h);
-    //CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(height) failed.");
 
     cl::size_t<3> origin;
     origin[0] = 0;
@@ -304,9 +376,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     region[2] = 1;
 
     cl::Event writeEvt;
-
-    /*err = queue.enqueueWriteImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &writeEvt);
-    CHECK_OPENCL_ERROR(err, "enqueueWriteBuffer(image) failed.");*/
 
     cl_int status;
 
@@ -332,13 +401,15 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     size_t kernelWorkGroupSize = kernel.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(devices[0], &err);
 
-    cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
+    //cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
 
-    cl::NDRange global(800,600);
-    cl::NDRange local(200,1);
+    cl::NDRange global(this->width,this->height);
+//    int local_w = this->width/kernelWorkGroupSize;
+//    int local_h = this->heith/kernelWorkGroupSize;
+    cl::NDRange local(32,24);
 
-    streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
-    int timer = sampleCommon->createTimer();
+    //streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
+    int timer =  this->sampleCommon->createTimer();
     sampleCommon->resetTimer(timer);
     sampleCommon->startTimer(timer);
 
@@ -373,7 +444,9 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     sampleCommon->stopTimer(timer);
     double time = (double)(sampleCommon->readTimer(timer));
-    cout << "\nTempo de renderizacao paralelo: " << time;
+    cout << "\n" << time;
+
+
     streamsdk::SDKBitMap bitmap;
 
     bitmap.load(OUTPUT_IMAGE);
