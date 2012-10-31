@@ -145,14 +145,14 @@ RayCasting::initSceneDefault(){
 	l->push_back((SceneObject*) sphere1);
 	l->push_back((SceneObject*) sphere2);
 	l->push_back((SceneObject*) sphere3);
-    l->push_back((SceneObject*) sphere4);
-	l->push_back((SceneObject*) sphere5);
-    l->push_back((SceneObject*) sphere6);
-	l->push_back((SceneObject*) sphere7);
-	l->push_back((SceneObject*) sphere8);
-    l->push_back((SceneObject*) sphere9);
-	l->push_back((SceneObject*) sphere10);
-    l->push_back((SceneObject*) sphere11);
+//    l->push_back((SceneObject*) sphere4);
+//	l->push_back((SceneObject*) sphere5);
+//    l->push_back((SceneObject*) sphere6);
+//	l->push_back((SceneObject*) sphere7);
+//	l->push_back((SceneObject*) sphere8);
+//    l->push_back((SceneObject*) sphere9);
+//	l->push_back((SceneObject*) sphere10);
+//    l->push_back((SceneObject*) sphere11);
 
 	scene->camera = new Camera(new Vector(3,2,0),new Vector(-1.0,0.5,0.0));
 	return scene;
@@ -409,29 +409,39 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     cl::NDRange local(32,24);
 
     //streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
-    int timer =  this->sampleCommon->createTimer();
-    sampleCommon->resetTimer(timer);
-    sampleCommon->startTimer(timer);
 
-    cl::Event ndrEvt;
-    status = queue.enqueueNDRangeKernel(kernel,cl::NullRange,global,local,0,&ndrEvt);
-    CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
 
-    origin[0] = 0;
-    origin[1] = 0;
-    origin[2] = 0;
-
-    region[0] = this->width;
-    region[1] = this->height;
-    region[2] = 1;
-
+    int timer = this->sampleCommon->createTimer();
+    int i;
     cl::Event readEvt;
+    for(i = 0; i < 50; i++){
+        this->sampleCommon->resetTimer(timer);
+        this->sampleCommon->startTimer(timer);
 
-    status = queue.enqueueReadImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &readEvt);
-    CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
+        cl::Event ndrEvt;
+        status = queue.enqueueNDRangeKernel(kernel,cl::NullRange,global,local,0,&ndrEvt);
+        CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
 
-    status = queue.flush();
-    CHECK_OPENCL_ERROR(status, "\n CommandQueue::flush() failed.");
+        origin[0] = 0;
+        origin[1] = 0;
+        origin[2] = 0;
+
+        region[0] = this->width;
+        region[1] = this->height;
+        region[2] = 1;
+
+        status = queue.enqueueReadImage(outputImage2D, CL_TRUE, origin, region, 0, 0, outputImageData, NULL, &readEvt);
+        CHECK_OPENCL_ERROR(status, "\n CommandQueue::senqueueNDRangeKernel(...) failed.");
+
+        status = queue.flush();
+        CHECK_OPENCL_ERROR(status, "\n CommandQueue::flush() failed.");
+
+        status = queue.finish();
+        CHECK_OPENCL_ERROR(status, "\n CommandQueue::flush() failed.");
+
+        this->sampleCommon->stopTimer(timer);
+        cout << "\n" << (double)(this->sampleCommon->readTimer(timer));
+    }
 
     cl_int eventStatus = CL_QUEUED;
     while(eventStatus != CL_COMPLETE)
@@ -441,13 +451,9 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
                     &eventStatus);
         CHECK_OPENCL_ERROR(status, "cl:Event.getInfo(CL_EVENT_COMMAND_EXECUTION_STATUS) failed.");
     }
+    //}
 
-    sampleCommon->stopTimer(timer);
-    double time = (double)(sampleCommon->readTimer(timer));
-    cout << "\n" << time;
-
-
-    streamsdk::SDKBitMap bitmap;
+    /*streamsdk::SDKBitMap bitmap;
 
     bitmap.load(OUTPUT_IMAGE);
     if(!bitmap.isLoaded()){
@@ -460,7 +466,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
 
     if(!bitmap.write(OUTPUT_IMAGE)){
         cout << "\nerro ao escrever imagem";
-    }
+    }*/
 
    free(outputImageData);
 
