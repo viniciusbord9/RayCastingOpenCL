@@ -6,7 +6,7 @@ using namespace std;
 
 int main(){
 
-    RayCasting raycasting(1024,768);
+    RayCasting raycasting(800,600);
     Scene *scene = raycasting.sceneDefault;
 
     if(raycasting.parallelRender(scene->cast_struct(),scene->camera->cast_struct(), scene->cast_objects(), scene->getObjects()->size()) == 0){

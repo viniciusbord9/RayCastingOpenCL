@@ -269,6 +269,18 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         cout << "erro ao criar o contexto";
     }
 
+
+    size_t kernelWorkGroupSize = kernel.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(devices[0], &err);
+
+    //cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
+
+    cl::NDRange global(this->width,this->height);
+//    int local_w = this->width/kernelWorkGroupSize;
+//    int local_h = this->heith/kernelWorkGroupSize;
+    cl::NDRange local(32,24);
+
+    //streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
+
     /****************************************************************************************/
     /*********                  Verificando suporte a imagem                            *****/
     /****************************************************************************************/
@@ -321,8 +333,8 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     program = cl::Program(context, source, &err);
     CHECK_OPENCL_ERROR(err, "Program::Program() failed.");*/
 
-    err = program.build(devices,"-w");
-    //CHECK_OPENCL_ERROR(err, "Program::build() failed.");
+    err = program.build(devices,"-cl-opt-disable");
+    CHECK_OPENCL_ERROR(err, "Program::build() failed.");
 
     if (err != CL_SUCCESS) {
         std::cout << "\n ERRO: ao criar o kernel" ;
@@ -398,19 +410,6 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
     status = kernel.setArg(5, outputImage2D);
     CHECK_OPENCL_ERROR(status, "Kernel::setArg(5) failed.");
 
-
-    size_t kernelWorkGroupSize = kernel.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(devices[0], &err);
-
-    //cout << "\n workgroups " << kernelWorkGroupSize << "\n\n";
-
-    cl::NDRange global(this->width,this->height);
-//    int local_w = this->width/kernelWorkGroupSize;
-//    int local_h = this->heith/kernelWorkGroupSize;
-    cl::NDRange local(32,24);
-
-    //streamsdk::SDKCommon *sampleCommon = new streamsdk::SDKCommon();
-
-
     int timer = this->sampleCommon->createTimer();
     int i;
     cl::Event readEvt;
@@ -440,7 +439,7 @@ RayCasting::parallelRender(scene *s, camera *cam, obj *list_objects, int qtde_ob
         CHECK_OPENCL_ERROR(status, "\n CommandQueue::flush() failed.");
 
         this->sampleCommon->stopTimer(timer);
-        cout << "\n" << (double)(this->sampleCommon->readTimer(timer));
+        cout << "\n" << (long double)(this->sampleCommon->readTimer(timer));
     }
 
     cl_int eventStatus = CL_QUEUED;
